@@ -196,7 +196,7 @@ private void suitFunctions(Card card) {
 				player.setCurrentHealth(damage);
 				if (player.getCurrentHealth() <= 0) {
 					System.out.println("You have been defeated.");
-					score = score + player.getCurrentHealth() + player.getWeaponPower();
+					score = deck.score() + player.getCurrentHealth() + player.getWeaponPower();
 					System.out.println("Your final score is: " + score);
 					System.exit(0);
 				} else {
@@ -217,7 +217,7 @@ private void suitFunctions(Card card) {
 					player.setCurrentHealth(player.getCurrentHealth() - damage);
 					if (player.getCurrentHealth() <= 0) {
 						System.out.println("You have been defeated.");
-						score = score + player.getCurrentHealth() + player.getWeaponPower();
+						score = deck.score() + player.getCurrentHealth() + player.getWeaponPower();
 						System.out.println("Your final score is: " + score);
 						System.exit(0);
 					} else {
@@ -240,7 +240,7 @@ private void checkWin() {
 		System.out.println("You have cleared the final obstacle and escaped the dungeon!");
 		System.out.println("You have " + player.getCurrentHealth() + " health left.");
 		System.out.println("You have " + player.getWeaponPower() + " attack power left.");
-		score = score + player.getCurrentHealth() + player.getWeaponPower();
+		score = deck.score() + player.getCurrentHealth() + player.getWeaponPower();
 		System.out.println("Your final score is: " + score);
 		System.exit(0);
 	}
