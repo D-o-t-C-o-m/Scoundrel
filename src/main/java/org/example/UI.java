@@ -96,7 +96,7 @@ private void flee() {
 	Iterator<Card> iterator = playfield.iterator();
 	while (iterator.hasNext()) {
 		Card card = iterator.next();
-		deck.add(card);
+		deck.addToFront(card);
 		iterator.remove();
 	}
 	//deck.shuffle();

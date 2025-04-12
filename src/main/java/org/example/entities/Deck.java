@@ -77,4 +77,8 @@ public boolean isEmpty() {
 	return cards.isEmpty();
 
 }
+public void addToFront(Card card) {
+	cards.add(0, card);
+	discards.remove(card);
+}
 }
