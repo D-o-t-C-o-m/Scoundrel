@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Scoundrel:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Scoundrel_jar</output-path>
+    <root id="archive" name="Scoundrel.jar">
+      <element id="module-output" name="Scoundrel" />
+    </root>
+  </artifact>
+</component>
