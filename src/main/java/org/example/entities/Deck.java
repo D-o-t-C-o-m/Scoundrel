@@ -5,7 +5,6 @@ import org.example.enums.Suit;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class Deck {
@@ -49,15 +48,9 @@ public void displayDeck() {
 }
 
 public void redFaceRemover() {
-	Iterator<Card> iterator = cards.iterator();
-	while (iterator.hasNext()) {
-		Card card = iterator.next();
-		if ((card.getSuit().equals(Suit.HEARTS) || card.getSuit().equals(Suit.DIAMONDS)) &&
-				(card.getRank().equals(Rank.ACE) || card.getRank().equals(Rank.KING) ||
-						card.getRank().equals(Rank.QUEEN) || card.getRank().equals(Rank.JACK))) {
-			iterator.remove();
-		}
-	}
+	cards.removeIf(card -> (card.getSuit().equals(Suit.HEARTS) || card.getSuit().equals(Suit.DIAMONDS)) &&
+			(card.getRank().equals(Rank.ACE) || card.getRank().equals(Rank.KING) ||
+					card.getRank().equals(Rank.QUEEN) || card.getRank().equals(Rank.JACK)));
 }
 
 public int score() {
