@@ -12,12 +12,15 @@ private final Deck deck;
 private final Player player = new Player(20, 0);
 final Scanner scanner;
 private int EnemyHealth;
+private String EnemyName;
+private boolean winState = false;
 
 public UI() {
 	deck = new Deck();
 	playfield = new ArrayList<>();
 	scanner = new Scanner(System.in);
 	EnemyHealth = 0;
+	EnemyName = "";
 }
 
 public void start() {
@@ -31,8 +34,9 @@ private void fillRoom() {
 	while (playfield.size() < 4) {
 		if (deck.isEmpty()) {
 			System.out.println("You sense that this is the final room.");
+			winState = true;
 			if (playfield.size()==1) {
-				checkWin();
+				break;
 			}
 			break;
 		}
@@ -41,17 +45,17 @@ private void fillRoom() {
 }
 
 private void getPlayer() {
-	System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() + " Attack Power: " + player.getWeaponPower());
+	System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() + " | Attack Power: " + player.getWeaponPower());
 }
 
 private void displayPlayfield() {
 	getPlayer();
-	System.out.println(playfield + "\n");
+	System.out.println(" ----------------------------------");
+	System.out.println("       "+playfield + "\n");
 }
 
 private void nextRoom() {
-	getPlayer();
-	System.out.println(playfield);
+	displayPlayfield();
 	System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > ");
 
 	int choice;
@@ -98,7 +102,7 @@ private void flee() {
 }
 
 private void enter() {
-		getPlayer();
+		displayPlayfield();
 		while (playfield.size() > 1) {
 			System.out.print("Which card would you like to interact with? (1-" + playfield.size() + ") > ");
 			int choice;
@@ -118,9 +122,28 @@ private void enter() {
 			}
 			displayPlayfield();
 		}
+		if (winState) {
+			int choice = 0;
+			try {
+				System.out.println(">");
+				choice = scanner.nextInt();
+				scanner.nextLine();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a number 1");
+				scanner.nextLine();
+			}
+
+			if (choice == 1) {
+				suitFunctions(playfield.get(0));
+				checkWin();
+			} else {
+				System.out.println("Invalid choice. Please try again.");
+			}
+
+		}
 		System.out.println("Room cleared, you can now leave.\n");
-		checkWin();
 		player.setHasHealed(false);
+		player.setHasFled(false);
 		fillRoom();
 		nextRoom();
 	}
@@ -143,7 +166,8 @@ private void suitFunctions(Card card) {
 			}
 		}
 		case SPADES, CLUBS -> {
-			System.out.println("You approach the enemy.");
+			EnemyName = card.toString();
+			System.out.println("You approach " + EnemyName + ".");
 			EnemyHealth = card.getValue();
 			int choice;
 			while (true) {
@@ -207,12 +231,10 @@ private void suitFunctions(Card card) {
 }
 
 private void checkWin() {
-	if (playfield.isEmpty()) {
 		System.out.println("You have cleared the final obstacle and escaped the dungeon!");
 		System.out.println("You have " + player.getCurrentHealth() + " health left.");
 		System.out.println("You have " + player.getWeaponPower() + " attack power left.");
 		System.out.println("Your final score is: " + deck.score());
 		System.exit(0);
 	}
-}
 }

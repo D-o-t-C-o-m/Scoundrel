@@ -33,7 +33,7 @@ public Card dealCard() {
 		return null;
 	}
 
-	discards.add(cards.getLast()); //This isn't actually right, it will include cards on the playing field
+	discards.add(cards.getLast());
 	return cards.removeLast();
 }
 
