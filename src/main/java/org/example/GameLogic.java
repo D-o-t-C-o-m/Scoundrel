@@ -13,6 +13,7 @@ private final Player player;
 private final UI ui;
 private int EnemyHealth;
 private String EnemyName;
+private boolean weaponFresh = false;
 
 public GameLogic(Deck deck, Player player, UI ui) {
 	this.deck = deck;
@@ -75,27 +76,35 @@ private void attackBareHanded(Card card) {
 }
 
 private void attackWithWeapon(Card card) {
-	System.out.println("You attack the enemy with a weapon.");
-	if (player.getWeaponPower() > EnemyHealth) {
-		System.out.println("You have defeated the enemy, and your weapon is now weaker. Attack Power is now: " + card.getValue());
-		player.setWeaponPower(EnemyHealth);
-		ui.getPlayfield().remove(card);
-	} else if (player.getWeaponPower() == EnemyHealth) {
-		System.out.println("You have defeated the enemy.");
-		ui.getPlayfield().remove(card);
-	} else if (player.getWeaponPower() < EnemyHealth) {
-		int damage = card.getValue() - player.getWeaponPower();
-		player.setCurrentHealth(player.getCurrentHealth() - damage);
-		if (player.getCurrentHealth() <= 0) {
-			System.out.println("You have been defeated.");
-			System.out.println("Your final score is: " + getScore());
-			System.exit(0);
-		} else {
-			int some = player.getWeaponPower() - card.getValue();
-			System.out.println("You have defeated the enemy, but you took "+ some +" damage.");
-			System.out.println("You have " + player.getCurrentHealth() + " health left.");
+	if (!weaponFresh && EnemyHealth >= player.getWeaponPower()) {
+		System.out.println("Your weapon is already bound to slay weaker foes. You must fight barehanded.");
+		attackBareHanded(card);
+	} else {
+		System.out.println("You attack the enemy with a weapon.");
+		if (player.getWeaponPower() > EnemyHealth) {
+			System.out.println("You have defeated the enemy, and your weapon is now weaker. Attack Power is now: " + card.getValue());
+			weaponFresh = false;
+			player.setWeaponPower(EnemyHealth);
+			ui.getPlayfield().remove(card);
+		} else if (player.getWeaponPower() == EnemyHealth) {
+			System.out.println("You have defeated the enemy.");
+			weaponFresh = false;
+			ui.getPlayfield().remove(card);
+		} else if (player.getWeaponPower() < EnemyHealth) {
+			weaponFresh = false;
+			int damage = card.getValue() - player.getWeaponPower();
+			player.setCurrentHealth(player.getCurrentHealth() - damage);
+			if (player.getCurrentHealth() <= 0) {
+				System.out.println("You have been defeated.");
+				System.out.println("Your final score is: " + getScore());
+				System.exit(0);
+			} else {
+				int some = player.getWeaponPower() - card.getValue();
+				System.out.println("You have defeated the enemy, but you took " + some + " damage.");
+				System.out.println("You have " + player.getCurrentHealth() + " health left.");
+			}
+			ui.getPlayfield().remove(card);
 		}
-		ui.getPlayfield().remove(card);
 	}
 }
 
@@ -116,6 +125,7 @@ public void flee() {
 private void handleDiamondCard(Card card) {
 	player.setWeaponPower(card.getValue());
 	ui.getPlayfield().remove(card);
+	weaponFresh = true;
 	System.out.println("You have found a weapon! Your attack power is now: " + player.getWeaponPower());
 }
 
