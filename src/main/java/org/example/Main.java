@@ -5,10 +5,7 @@ import java.io.IOException;
 public class Main {
 public static void main(String[] args) throws IOException {
 	UI ui = new UI();
-	asciiArt title = new asciiArt();
-	title.Title();
 	int choice;
-
 	System.out.println("\n\nWelcome, Scoundrel. Would you like to Read the rules, or Begin?");
 	System.out.println("1. Read the rules");
 	System.out.println("2. Begin");

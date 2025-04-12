@@ -128,7 +128,7 @@ private void enter() {
 		if (winState) {
 			int choice = 0;
 			try {
-				System.out.println(">");
+				System.out.print(">");
 				choice = scanner.nextInt();
 				scanner.nextLine();
 			} catch (InputMismatchException e) {
@@ -238,7 +238,7 @@ private void suitFunctions(Card card) {
 }
 
 private void checkWin() {
-		System.out.println("You have cleared the final obstacle and escaped the dungeon!");
+		System.out.println("/nYou have cleared the final obstacle and escaped the dungeon!");
 		System.out.println("You have " + player.getCurrentHealth() + " health left.");
 		System.out.println("You have " + player.getWeaponPower() + " attack power left.");
 		score = deck.score() + player.getCurrentHealth() + player.getWeaponPower();

@@ -64,16 +64,16 @@ public String toString() {
 		face = "K";
 	}
 	if (suit == Suit.HEARTS) {
-		icon += "❤\uFE0F";
+		icon += "❤\uFE0F"; //Heart
 	}
 	if (suit == Suit.DIAMONDS) {
-		icon += "\uD83D\uDDE1\uFE0F";
+		icon += "⚔\uFE0F"; //Sword
 	}
 	if (suit == Suit.CLUBS) {
-		icon += "\uD83D\uDC80";
+		icon += "\uD83D\uDC80"; //Skull
 	}
 	if (suit == Suit.SPADES) {
-		icon += "\uD83E\uDDDF\u200D♂\uFE0F";
+		icon += "\uD83D\uDC7D"; //Alien
 	}
 	return face +" "+ icon;
 }
