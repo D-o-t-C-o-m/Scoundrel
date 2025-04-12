@@ -31,6 +31,7 @@ public void shuffle() {
 public Card dealCard() {
 	if (cards.isEmpty()) {
 		System.out.println("Deck is empty. No more cards to deal.");
+		return null;
 	}
 
 	discards.add(cards.getLast()); //This isn't actually right, it will include cards on the playing field
@@ -79,4 +80,8 @@ public void add(Card card) {
 	}
 }
 
+public boolean isEmpty() {
+	return cards.isEmpty();
+
+}
 }

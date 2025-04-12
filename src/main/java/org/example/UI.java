@@ -6,16 +6,14 @@ import org.example.entities.Player;
 import org.example.enums.Suit;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class UI {
 private final List<Card> playfield;
 private final Deck deck;
-private final Player player = new Player(20, 0);;
+private final Player player = new Player(20, 0);
+;
 private final List<Card> weapons;
 private final Scanner scanner;
 private int EnemyHealth;
@@ -31,34 +29,50 @@ public UI() {
 
 public void start() {
 	deck.shuffle();
+	deck.shuffle();
 	fillRoom();
 	nextRoom();
 }
 
 public void fillRoom() {
 	while (playfield.size() < 4) {
+		if (deck.isEmpty()) {
+			System.out.println("You sense that this is the final room.");
+			break;
+		}
 		playfield.add(deck.dealCard());
 	}
 }
-public void getPlayer(){
-	System.out.println("Health Points: "+ player.getCurrentHealth()+ "/ "+ player.getMaxHealth() + " Attack Power: " + player.getWeaponPower());
+
+public void getPlayer() {
+	System.out.println("\n Health Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() + " Attack Power: " + player.getWeaponPower());
 }
+
 public void displayPlayfield() {
 	getPlayer();
-	System.out.println(playfield.toString());
+	System.out.println(playfield.toString() + "\n");
 }
+
 public void nextRoom() {
 	getPlayer();
 	System.out.println(playfield.toString());
-	System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > " );
-	int choice = scanner.nextInt();
-	scanner.nextLine();
+	System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > ");
+
+	int choice = -1;
+	try {
+		choice = scanner.nextInt();
+		scanner.nextLine();
+	} catch (InputMismatchException e) {
+		System.out.println("Invalid input. Please enter a number (1 or 2).");
+		scanner.nextLine();
+		nextRoom();
+		return;
+	}
 
 	if (choice == 1) {
 		System.out.println("You step forth");
 		player.hasFled = false;
 		enter();
-
 	} else if (choice == 2) {
 		if (player.hasFled) {
 			System.out.println("You cannot flee again, you must go forward.");
@@ -71,7 +85,8 @@ public void nextRoom() {
 		displayPlayfield();
 	}
 }
-public void flee(){
+
+public void flee() {
 	System.out.println("You have fled the room.");
 	player.setHasFled(true);
 
@@ -85,29 +100,36 @@ public void flee(){
 	fillRoom();
 	nextRoom();
 }
+
 public void enter() {
-	getPlayer();
-	while (playfield.size() > 1) {
-		System.out.print("Which card would you like to interact with? (1-" + playfield.size() + ") > ");
-		int choice = scanner.nextInt();
-		scanner.nextLine();
-		switch (choice) {
-			case 1 -> suitFunctions(playfield.get(0));
-			case 2 -> suitFunctions(playfield.get(1));
-			case 3 -> suitFunctions(playfield.get(2));
-			case 4 -> suitFunctions(playfield.get(3));
-			default -> System.out.println("Invalid choice. Please try again.");
+		getPlayer();
+		while (playfield.size() > 1) {
+			System.out.print("Which card would you like to interact with? (1-" + playfield.size() + ") > ");
+			int choice = -1;
+			try {
+				choice = scanner.nextInt();
+				scanner.nextLine();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a number between 1 and " + playfield.size() + ".");
+				scanner.nextLine();
+				continue;
+			}
+
+			if (choice >= 1 && choice <= playfield.size()) {
+				suitFunctions(playfield.get(choice - 1));
+			} else {
+				System.out.println("Invalid choice. Please try again.");
+			}
+			displayPlayfield();
 		}
-		displayPlayfield();
-	}
-		System.out.println("Room cleared, you can now leave.");
+		System.out.println("Room cleared, you can now leave.\n");
+		checkWin();
 		player.setHasHealed(false);
 		fillRoom();
 		nextRoom();
+	}
 
-}
-
-public void suitFunctions (Card card) {
+public void suitFunctions(Card card) {
 	Suit suit = card.getSuit();
 	switch (suit) {
 		case HEARTS -> {
@@ -127,9 +149,24 @@ public void suitFunctions (Card card) {
 		case SPADES, CLUBS -> {
 			System.out.println("You approach the enemy.");
 			EnemyHealth = card.getValue();
-			System.out.println("How will you attack? (1) Bare-Handed or (2) With a Weapon? > ");
-			int choice = scanner.nextInt();
-			scanner.nextLine();
+			int choice = -1;
+			while (true) {
+				System.out.print("How will you attack? (1) Bare-Handed or (2) With a Weapon? > ");
+				try {
+					choice = scanner.nextInt();
+					scanner.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid input. Please enter 1 or 2.");
+					scanner.nextLine();
+					continue;
+				}
+				if (choice == 1 || choice == 2) {
+					break;
+				} else {
+					System.out.println("Invalid choice. Please enter 1 or 2.");
+				}
+			}
+
 			if (choice == 1) {
 				System.out.println("You attack the enemy with your bare hands.");
 				player.setAttackPower(EnemyHealth);
@@ -138,38 +175,30 @@ public void suitFunctions (Card card) {
 				if (player.getCurrentHealth() <= 0) {
 					System.out.println("You have been defeated.");
 					System.exit(0);
-					break;
 				} else {
 					System.out.println("You have " + player.getCurrentHealth() + " health left.");
 				}
 				playfield.remove(card);
-
 			} else if (choice == 2) {
 				System.out.println("You attack the enemy with a weapon.");
 				if (player.getWeaponPower() > EnemyHealth) {
 					System.out.println("You have defeated the enemy, and your weapon is now weaker.");
 					player.setWeaponPower(EnemyHealth);
 					playfield.remove(card);
-					break;
 				} else if (player.getWeaponPower() == EnemyHealth) {
 					System.out.println("You have defeated the enemy.");
 					playfield.remove(card);
-					break;
 				} else if (player.getWeaponPower() < EnemyHealth) {
 					int damage = card.getValue() - player.getWeaponPower();
 					player.setCurrentHealth(player.getCurrentHealth() - damage);
 					if (player.getCurrentHealth() <= 0) {
 						System.out.println("You have been defeated.");
 						System.exit(0);
-						break;
 					} else {
 						System.out.println("You have defeated the enemy, but you took some damage.");
 						System.out.println("You have " + player.getCurrentHealth() + " health left.");
 					}
 					playfield.remove(card);
-					break;
-				} else {
-					System.out.println("Invalid choice. Please try again.");
 				}
 			}
 		}
@@ -179,8 +208,17 @@ public void suitFunctions (Card card) {
 			weapons.add(card);
 			playfield.remove(card);
 			System.out.println("You have found a weapon! Your attack power is now: " + player.getWeaponPower());
-			break;
 		}
+	}
+}
+
+public void checkWin() {
+	if (playfield.isEmpty()) {
+		System.out.println("You have cleared the final obstacle and escaped the dungeon!");
+		System.out.println("You have " + player.getCurrentHealth() + " health left.");
+		System.out.println("You have " + player.getWeaponPower() + " attack power left.");
+		System.out.println("Your final score is: " + deck.score());
+		System.exit(0);
 	}
 }
 }
