@@ -1,12 +1,15 @@
 package org.example;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
 public static void main(String[] args) throws IOException {
+	System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
 	UI ui = new UI();
 	int choice;
-	System.out.println("\n\nWelcome, Scoundrel. Would you like to Read the rules, or Begin?");
+	System.out.println("Welcome, Scoundrel. Would you like to Read the rules, or Begin?");
 	System.out.println("1. Read the rules");
 	System.out.println("2. Begin");
 	System.out.print("> ");
