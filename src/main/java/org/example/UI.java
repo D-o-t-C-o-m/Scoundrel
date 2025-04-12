@@ -14,6 +14,7 @@ final Scanner scanner;
 private int EnemyHealth;
 private String EnemyName;
 private boolean winState = false;
+private int score;
 
 public UI() {
 	deck = new Deck();
@@ -21,6 +22,7 @@ public UI() {
 	scanner = new Scanner(System.in);
 	EnemyHealth = 0;
 	EnemyName = "";
+	score = deck.score();
 }
 
 public void start() {
@@ -134,7 +136,7 @@ private void enter() {
 			}
 
 			if (choice == 1) {
-				suitFunctions(playfield.get(0));
+				suitFunctions(playfield.getFirst());
 				checkWin();
 			} else {
 				System.out.println("Invalid choice. Please try again.");
@@ -194,6 +196,8 @@ private void suitFunctions(Card card) {
 				player.setCurrentHealth(damage);
 				if (player.getCurrentHealth() <= 0) {
 					System.out.println("You have been defeated.");
+					score = score + player.getCurrentHealth() + player.getWeaponPower();
+					System.out.println("Your final score is: " + score);
 					System.exit(0);
 				} else {
 					System.out.println("You have " + player.getCurrentHealth() + " health left.");
@@ -213,6 +217,8 @@ private void suitFunctions(Card card) {
 					player.setCurrentHealth(player.getCurrentHealth() - damage);
 					if (player.getCurrentHealth() <= 0) {
 						System.out.println("You have been defeated.");
+						score = score + player.getCurrentHealth() + player.getWeaponPower();
+						System.out.println("Your final score is: " + score);
 						System.exit(0);
 					} else {
 						System.out.println("You have defeated the enemy, but you took some damage.");
@@ -234,7 +240,8 @@ private void checkWin() {
 		System.out.println("You have cleared the final obstacle and escaped the dungeon!");
 		System.out.println("You have " + player.getCurrentHealth() + " health left.");
 		System.out.println("You have " + player.getWeaponPower() + " attack power left.");
-		System.out.println("Your final score is: " + deck.score());
+		score = score + player.getCurrentHealth() + player.getWeaponPower();
+		System.out.println("Your final score is: " + score);
 		System.exit(0);
 	}
 }
