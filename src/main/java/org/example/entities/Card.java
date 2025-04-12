@@ -64,16 +64,16 @@ public String toString() {
 		face = "K";
 	}
 	if (suit == Suit.HEARTS) {
-		icon += "♥";
+		icon += "H";
 	}
 	if (suit == Suit.DIAMONDS) {
-		icon += "♦";
+		icon += "D";
 	}
 	if (suit == Suit.CLUBS) {
-		icon += "♣";
+		icon += "C";
 	}
 	if (suit == Suit.SPADES) {
-		icon += "♠";
+		icon += "S";
 	}
 	return face +" "+ icon;
 }
