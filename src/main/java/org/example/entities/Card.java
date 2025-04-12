@@ -65,15 +65,21 @@ public String toString() {
 	}
 	if (suit == Suit.HEARTS) {
 		icon += "❤\uFE0F"; //Heart
+		//icon += "HEART"; // Placeholder for Heart icon
+
 	}
 	if (suit == Suit.DIAMONDS) {
 		icon += "⚔\uFE0F"; //Sword
+		//icon += "DIAMOND"; // Placeholder for Diamond icon
 	}
 	if (suit == Suit.CLUBS) {
 		icon += "\uD83D\uDC80"; //Skull
+		//icon += "CLUB"; // Placeholder for Club icon
 	}
 	if (suit == Suit.SPADES) {
-		icon += "\uD83D\uDC7D"; //Alien
+		//icon += "\uD83D\uDC7D"; //Alien
+		icon += "\uD83E\uDDDF";
+		//icon += "SPADE"; // Placeholder for Spade icon
 	}
 	return face +" "+ icon;
 }
