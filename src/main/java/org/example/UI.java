@@ -58,33 +58,34 @@ private void displayPlayfield() {
 
 private void nextRoom() {
 	displayPlayfield();
-	System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > ");
-
-	int choice;
-	try {
-		choice = scanner.nextInt();
-		scanner.nextLine();
-	} catch (InputMismatchException e) {
-		System.out.println("Invalid input. Please enter a number (1 or 2).");
-		scanner.nextLine();
-		nextRoom();
-		return;
-	}
-
-	if (choice == 1) {
-		System.out.println("You step forth");
-		player.hasFled = false;
-		enter();
-	} else if (choice == 2) {
-		if (player.hasFled) {
-			System.out.println("You cannot flee again, you must go forward.");
-			displayPlayfield();
-			enter();
+	int choice = -1;
+	while (choice != 1 && choice != 2) {
+		System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > ");
+		try {
+			choice = scanner.nextInt();
+			scanner.nextLine();
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input. Please enter a number (1 or 2).");
+			scanner.nextLine();
+			nextRoom();
+			return;
 		}
-		flee();
-	} else {
-		System.out.println("Invalid choice. Please try again.");
-		displayPlayfield();
+
+		if (choice == 1) {
+			System.out.println("You step forth");
+			player.hasFled = false;
+			enter();
+		} else if (choice == 2) {
+			if (player.hasFled) {
+				System.out.println("You cannot flee again, you must go forward.");
+				displayPlayfield();
+				enter();
+			}
+			flee();
+		} else {
+			System.out.println("Invalid choice. Please try again.");
+			displayPlayfield();
+		}
 	}
 }
 
@@ -98,7 +99,7 @@ private void flee() {
 		deck.add(card);
 		iterator.remove();
 	}
-	deck.shuffle();
+	//deck.shuffle();
 	fillRoom();
 	nextRoom();
 }
