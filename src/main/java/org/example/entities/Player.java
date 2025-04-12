@@ -5,7 +5,8 @@ public class Player {
 private int maxHealth;
 private int currentHealth;
 private int attackPower;
-private boolean hasFled;
+private int weaponPower;
+public boolean hasFled;
 private boolean hasHealed;
 
 public Player(int maxHealth, int attackPower) {
@@ -40,9 +41,17 @@ public void setAttackPower(int attackPower) {
 	this.attackPower = attackPower;
 }
 
+public int getWeaponPower() {
+	return weaponPower;
+}
+public void setWeaponPower(int weaponPower) {
+	this.weaponPower = weaponPower;
+}
+
 public boolean hasFled() {
 	return hasFled;
 }
+
 
 public void setHasFled(boolean hasFled) {
 	this.hasFled = hasFled;

@@ -33,7 +33,7 @@ public Card dealCard() {
 		System.out.println("Deck is empty. No more cards to deal.");
 	}
 
-	discards.add(cards.getLast());
+	discards.add(cards.getLast()); //This isn't actually right, it will include cards on the playing field
 	return cards.removeLast();
 }
 
@@ -69,4 +69,14 @@ public int score() {
 	}
 	return score;
 }
+
+public void add(Card card) {
+	if (card != null) {
+		cards.add(card);
+		discards.remove(card);
+	} else {
+		System.out.println("Card cannot be null.");
+	}
+}
+
 }

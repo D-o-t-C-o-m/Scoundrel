@@ -20,25 +20,6 @@ public Rank getRank() {
 	return rank;
 }
 
-public int getValue() {
-	return switch (rank) {
-		case ACE -> 14;
-		case TWO -> 2;
-		case THREE -> 3;
-		case FOUR -> 4;
-		case FIVE -> 5;
-		case SIX -> 6;
-		case SEVEN -> 7;
-		case EIGHT -> 8;
-		case NINE -> 9;
-		case TEN -> 10;
-		case JACK -> 11;
-		case QUEEN -> 12;
-		case KING -> 13;
-		default -> throw new IllegalArgumentException("Invalid card rank: " + rank);
-	};
-}
-
 @Override
 public String toString() {
 	String face = "";
@@ -95,5 +76,36 @@ public String toString() {
 		icon += "♠";
 	}
 	return face +" "+ icon;
+}
+
+public int getValue() {
+	if (rank == Rank.ACE) {
+		return 14;
+	} else if (rank == Rank.TWO) {
+		return 2;
+	} else if (rank == Rank.THREE) {
+		return 3;
+	} else if (rank == Rank.FOUR) {
+		return 4;
+	} else if (rank == Rank.FIVE) {
+		return 5;
+	} else if (rank == Rank.SIX) {
+		return 6;
+	} else if (rank == Rank.SEVEN) {
+		return 7;
+	} else if (rank == Rank.EIGHT) {
+		return 8;
+	} else if (rank == Rank.NINE) {
+		return 9;
+	} else if (rank == Rank.TEN) {
+		return 10;
+	} else if (rank == Rank.JACK) {
+		return 11;
+	} else if (rank == Rank.QUEEN) {
+		return 12;
+	} else if (rank == Rank.KING) {
+		return 13;
+	}
+	return -1; // Invalid rank
 }
 }
