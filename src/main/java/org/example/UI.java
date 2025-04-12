@@ -10,7 +10,7 @@ public class UI {
 private final List<Card> playfield;
 private final Deck deck;
 private final Player player = new Player(20, 0);
-private final Scanner scanner;
+final Scanner scanner;
 private int EnemyHealth;
 
 public UI() {
@@ -41,7 +41,7 @@ private void fillRoom() {
 }
 
 private void getPlayer() {
-	System.out.println("\n Health Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() + " Attack Power: " + player.getWeaponPower());
+	System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() + " Attack Power: " + player.getWeaponPower());
 }
 
 private void displayPlayfield() {
