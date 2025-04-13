@@ -1,12 +1,12 @@
-A java implementation of Scoundrel -A Single Player Rogue-like Card Game by Zach Gage and Kurt Bieg
+A java implementation of Scoundrel - A Single Player Rogue-like Card Game by Zach Gage and Kurt Bieg - http://stfj.net/art/2011/Scoundrel.pdf
 
 ==Brief Rules==
 
     Goal: Clear the deck. You lose if your health hits 0.
     Rooms: Each room is 4 cards. Choose 3 in any order. Once one card is left, the room is clear, and 3 new cards are drawn from the deck.
-    Hearts (♥): Potions—gain 2–10 health (max 20). One use per room; extras discarded.
-    Diamonds (♦): Weapons—equip a blade (2–10) to fight monsters.
-    Clubs (♣) & Spades (♠): Monsters—barehanded, take full damage. With a weapon, use it only if no monster is attached or the last monster is stronger; choose to strike (damage = monster - weapon if higher, else 0; weapon becomes monster value) or barehanded (full damage).
+    Hearts (Heart): Potions — gain 2–10 health (max 20). One use per room; extras discarded.
+    Diamonds (Sword): Weapons — equip a blade (2–10) to fight monsters.
+    Clubs (Skull) & Spades (Zombie): Monsters—barehanded, take full damage. With a weapon, use it only if no monster is attached or the last monster is stronger; choose to strike (damage = monster - weapon if higher, else 0; weapon becomes monster value) or barehanded (full damage).
     Flee: Skip a room before any actions to move its cards to the bottom of the deck. You may not flee 2 consecutive rooms.
 
 
