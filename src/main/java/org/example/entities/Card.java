@@ -77,8 +77,7 @@ public String toString() {
 		//icon += "CLUB"; // Placeholder for Club icon
 	}
 	if (suit == Suit.SPADES) {
-		//icon += "\uD83D\uDC7D"; //Alien
-		icon += "\uD83E\uDDDF";
+		icon += "\uD83E\uDDDF"; // Zombie
 		//icon += "SPADE"; // Placeholder for Spade icon
 	}
 	return face +" "+ icon;
