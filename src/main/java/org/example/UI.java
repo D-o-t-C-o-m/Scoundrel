@@ -3,6 +3,7 @@ package org.example;
 import org.example.entities.Card;
 import org.example.entities.Deck;
 import org.example.entities.Player;
+import org.example.enums.Suit;
 
 import java.util.*;
 
@@ -15,6 +16,8 @@ private final Player player = new Player(20, 0);
 private final Scanner scanner;
 private final GameLogic gameLogic;
 private boolean winState = false;
+private boolean goodStart = false;
+public int roomCount = 0;
 
 public UI() {
 	deck = new Deck();
@@ -27,8 +30,36 @@ public UI() {
 
 public void start() {
 	deck.shuffle();
-	fillRoom();
-	nextRoom();
+	firstRoom();
+	//fillRoom();
+	//nextRoom();
+}
+
+public void firstRoom() {
+	while (!goodStart) {
+		int size = 4;
+		while (playfield.size() < size) {
+			playfield.add(deck.dealCard());
+
+		}
+		int redCard = 0;
+		int blackCard = 0;
+		for (Card card : playfield) {
+			if ((card.getSuit().equals(Suit.CUPS) || card.getSuit().equals(Suit.SWORDS))) {
+				redCard++;
+			} else if ((card.getSuit().equals(Suit.WANDS) || card.getSuit().equals(Suit.PENTACLES))) {
+				blackCard++;
+			}
+		}
+		if (redCard == 4 || blackCard == 4) {
+			gameLogic.discard(playfield);
+			deck.shuffle();
+		} else {
+			nextRoom();
+			goodStart = true;
+			roomCount++;
+		}
+	}
 }
 
 public void fillRoom() {
@@ -51,7 +82,7 @@ public void fillRoom() {
 
 	}
 	if (roll1D6() == 1) {
-			while (playfield2.size() < size2) {
+		while (playfield2.size() < size2) {
 			if (deck.isEmpty()) {
 				handleFinalRoom();
 				break;
@@ -62,16 +93,16 @@ public void fillRoom() {
 		System.out.println("A branching path is before you.");
 		roomChoice();
 	}
-	size = 4;
 }
+
 
 public void holdItem(int index) {
 	if (held.size() > 1) {
 		System.out.println("You can only hold one item at a time.");
 	} else {
-		System.out.println("You have chosen to hold " + playfield.get(index -1));
-		held.add(playfield.get(index -1 ));
-		playfield.remove(index -1);
+		System.out.println("You have chosen to hold " + playfield.get(index - 1));
+		held.add(playfield.get(index - 1));
+		playfield.remove(index - 1);
 	}
 }
 
@@ -102,7 +133,7 @@ public void roomChoice() {
 	}
 }
 
-private int roll1D6() {
+public int roll1D6() {
 	Random random = new Random();
 	return random.nextInt(1, 7);
 }
@@ -124,6 +155,7 @@ private void getPlayerStats() {
 
 public void nextRoom() {
 	displayPlayfield();
+	roomCount++;
 	int choice = -1;
 	while (choice != 1 && choice != 2) {
 		System.out.print("You are standing in the door to a room. Do you (1) Enter or (2) Flee? > ");
@@ -147,8 +179,8 @@ public void nextRoom() {
 				enter();
 			}
 			gameLogic.flee();
-		//} else if (choice == 3){
-		//	deck.getDiscards();
+			//} else if (choice == 3){
+			//	deck.getDiscards();
 		} else {
 			System.out.println("Invalid choice. Please try again.");
 			displayPlayfield();
@@ -221,7 +253,7 @@ private void enter() {
 	resetRoom();
 }
 
-private void resetRoom(){
+private void resetRoom() {
 	player.setHasHealed(false);
 	player.setHasFled(false);
 	fillRoom();
@@ -232,7 +264,7 @@ private void checkWin() {
 	System.out.println("/nYou have cleared the final obstacle and escaped the dungeon!");
 	System.out.println("You have " + player.getCurrentHealth() + " health left.");
 	System.out.println("You have " + player.getWeaponPower() + " attack power left.");
-	int score = deck.score() + player.getCurrentHealth() + player.getWeaponPower();
+	int score = deck.score() + player.getCurrentHealth() + player.getWeaponPower()+ roomCount;
 	System.out.println("Your final score is: " + score);
 	System.exit(0);
 }

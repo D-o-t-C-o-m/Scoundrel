@@ -1,32 +1,32 @@
 package org.example.entities;
 
-public class events {
+public class Events {
 
-public void getEvent(String event) {
-	//should this be an int?
+public void getEvent(int event) {
+
 	switch (event) {
-		case "fool" -> theFool();
-		case "magician" -> theMagician();
-		case "highPriestess" -> theHighPriestess();
-		case "empress" -> theEmpress();
-		case "emperor" -> theEmperor();
-		case "hierophant" -> theHierophant();
-		case "lovers" -> theLovers();
-		case "chariot" -> theChariot();
-		case "strength" -> theStrength();
-		case "hermit" -> theHermit();
-		case "wheelOfFortune" -> theWheelOfFortune();
-		case "justice" -> Justice();
-		case "hangedMan" -> theHangedMan();
-		case "death" -> Death();
-		case "temperance" -> theTemperance();
-		case "judgement" -> theJudgement();
-		case "world" -> theWorld();
-		case "devil" -> theDevil();
-		case "tower" -> theTower();
-		case "star" -> theStar();
-		case "moon" -> theMoon();
-		case "sun" -> theSun();
+		case 1 -> theFool();
+		case 2 -> theMagician();
+		case 3 -> theHighPriestess();
+		case 4 -> theEmpress();
+		case 5 -> theEmperor();
+		case 6 -> theHierophant();
+		case 7 -> theLovers();
+		case 8 -> theChariot();
+		case 9 -> theStrength();
+		case 10 -> theHermit();
+		case 11 -> theWheelOfFortune();
+		case 12 -> Justice();
+		case 13 -> theHangedMan();
+		case 14 -> Death();
+		case 15 -> theTemperance();
+		case 16 -> theJudgement();
+		case 17 -> theWorld();
+		case 18 -> theDevil();
+		case 19 -> theTower();
+		case 20 -> theStar();
+		case 21 -> theMoon();
+		case 22 -> theSun();
 	}
 }
 	/**
@@ -125,6 +125,7 @@ public void getEvent(String event) {
 	/**
 	 * An Ace with 1d6 additional Damage
 	 */
+   //Death: shuffle selected card and replace it with the strongest enemy left in the deck (usually ace).Useful to making the most of a fresh sword
 	private void Death () {
 		// Implementation pending
 	}

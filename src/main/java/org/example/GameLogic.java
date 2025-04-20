@@ -15,6 +15,7 @@ private final UI ui;
 private int EnemyHealth;
 private String EnemyName;
 private boolean weaponFresh = false;
+public static boolean allowUsedWeaponOverHit = false;
 
 public GameLogic(Deck deck, Player player, UI ui) {
 	this.deck = deck;
@@ -24,6 +25,9 @@ public GameLogic(Deck deck, Player player, UI ui) {
 	EnemyName = "";
 }
 
+public static void setAllowUsedWeaponOverHit() {
+	allowUsedWeaponOverHit = true;
+}
 public void handleCardInteraction(Card card) {
 	Suit suit = card.getSuit();
 	switch (suit) {
@@ -80,6 +84,9 @@ private void attackBareHanded(Card card) {
 }
 
 private void attackWithWeapon(Card card) {
+	if (allowUsedWeaponOverHit){
+		weaponFresh = true;
+	}
 	if (!weaponFresh && EnemyHealth >= player.getWeaponPower()) {
 		System.out.println("Your weapon is already bound to slay weaker foes. You must fight barehanded.");
 		attackBareHanded(card);
@@ -137,6 +144,6 @@ private void handleDiamondCard(Card card) {
 }
 
 private int getScore() {
-	return deck.score() + player.getCurrentHealth() + player.getWeaponPower();
+	return deck.score() + player.getCurrentHealth() + player.getWeaponPower()+ui.roomCount;
 }
 }
