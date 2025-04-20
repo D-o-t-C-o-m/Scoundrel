@@ -143,11 +143,11 @@ public String toString() {
 	}
 	if (suit == Suit.CUPS) {
 		icon += "\uD800\uDCEF"; //Cup
-		//icon += "❤\uFE0F"; //Heart
+		//icon += "❤️"; //Heart
 		//icon += "HEART"; // Placeholder for Heart icon
 	}
 	if (suit == Suit.SWORDS) {
-		//icon += "⚔\uFE0F"; //Sword
+		//icon += "⚔️"; //Sword
 		icon += "⚸";
 		//icon += "DIAMOND"; // Placeholder for Diamond icon
 	}
