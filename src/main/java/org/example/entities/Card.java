@@ -12,14 +12,14 @@ public Card(Suit suit, Rank rank) {
 	this.rank = rank;
 }
 
-public Suit getSuit() {
+public  Suit getSuit() {
 	return suit;
 }
 
 public Rank getRank() {
 	return rank;
 }
-
+//🔮
 @Override
 public String toString() {
 	String face = "";
@@ -54,8 +54,11 @@ public String toString() {
 	if (rank == Rank.TEN) {
 		face = "10";
 	}
-	if (rank == Rank.JACK) {
-		face = "J";
+	if (rank == Rank.PAGE) {
+		face = "P";
+	}
+	if (rank == Rank.KNIGHT) {
+		face = "Kn";
 	}
 	if (rank == Rank.QUEEN) {
 		face = "Q";
@@ -63,21 +66,24 @@ public String toString() {
 	if (rank == Rank.KING) {
 		face = "K";
 	}
-	if (suit == Suit.HEARTS) {
-		icon += "❤\uFE0F"; //Heart
+	if (suit == Suit.CUPS) {
+		icon += "\uD800\uDCEF"; //Cup
+		//icon += "❤\uFE0F"; //Heart
 		//icon += "HEART"; // Placeholder for Heart icon
-
 	}
-	if (suit == Suit.DIAMONDS) {
-		icon += "⚔\uFE0F"; //Sword
+	if (suit == Suit.SWORDS) {
+		//icon += "⚔\uFE0F"; //Sword
+		icon += "⚸";
 		//icon += "DIAMOND"; // Placeholder for Diamond icon
 	}
-	if (suit == Suit.CLUBS) {
-		icon += "\uD83D\uDC80"; //Skull
+	if (suit == Suit.PENTACLES) {
+		//icon += "\uD83D\uDC80"; //Skull
+		icon += "⛧";
 		//icon += "CLUB"; // Placeholder for Club icon
 	}
-	if (suit == Suit.SPADES) {
-		icon += "\uD83E\uDDDF"; // Zombie
+	if (suit == Suit.WANDS) {
+	//	icon += "\uD83E\uDDDF"; // Zombie
+		icon += "⸝*";
 		//icon += "SPADE"; // Placeholder for Spade icon
 	}
 	return face +" "+ icon;
@@ -104,12 +110,14 @@ public int getValue() {
 		return 9;
 	} else if (rank == Rank.TEN) {
 		return 10;
-	} else if (rank == Rank.JACK) {
+	} else if (rank == Rank.PAGE) {
 		return 11;
-	} else if (rank == Rank.QUEEN) {
+	} else if (rank == Rank.KNIGHT) {
 		return 12;
-	} else if (rank == Rank.KING) {
+	} else if (rank == Rank.QUEEN) {
 		return 13;
+	} else if (rank == Rank.KING) {
+		return 14;
 	}
 	return -1; // Invalid rank
 }

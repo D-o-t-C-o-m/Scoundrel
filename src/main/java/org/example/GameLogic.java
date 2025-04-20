@@ -6,6 +6,7 @@ import org.example.entities.Player;
 import org.example.enums.Suit;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class GameLogic {
 private final Deck deck;
@@ -26,9 +27,9 @@ public GameLogic(Deck deck, Player player, UI ui) {
 public void handleCardInteraction(Card card) {
 	Suit suit = card.getSuit();
 	switch (suit) {
-		case HEARTS -> handleHeartCard(card);
-		case SPADES, CLUBS -> handleMonsterCard(card);
-		case DIAMONDS -> handleDiamondCard(card);
+		case CUPS -> handleHeartCard(card);
+		case WANDS, PENTACLES -> handleMonsterCard(card);
+		case SWORDS -> handleDiamondCard(card);
 	}
 }
 
@@ -108,16 +109,19 @@ private void attackWithWeapon(Card card) {
 	}
 }
 
-public void flee() {
-	System.out.println("You have fled the room.");
-	player.setHasFled(true);
-
-	Iterator<Card> iterator = ui.getPlayfield().iterator();
+public void discard(List<Card> cards) {
+	Iterator<Card> iterator = cards.iterator();
 	while (iterator.hasNext()) {
 		Card card = iterator.next();
 		deck.addToFront(card);
 		iterator.remove();
 	}
+}
+
+public void flee() {
+	System.out.println("You have fled the room.");
+	player.setHasFled(true);
+	discard(ui.getPlayfield());
 	ui.fillRoom();
 	ui.nextRoom();
 }

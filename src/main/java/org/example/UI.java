@@ -8,6 +8,8 @@ import java.util.*;
 
 public class UI {
 private final List<Card> playfield;
+private final List<Card> held;
+private final List<Card> playfield2;
 private final Deck deck;
 private final Player player = new Player(20, 0);
 private final Scanner scanner;
@@ -17,6 +19,8 @@ private boolean winState = false;
 public UI() {
 	deck = new Deck();
 	playfield = new ArrayList<>();
+	held = new ArrayList<>();
+	playfield2 = new ArrayList<>();
 	scanner = new Scanner(System.in);
 	gameLogic = new GameLogic(deck, player, this);
 }
@@ -28,13 +32,80 @@ public void start() {
 }
 
 public void fillRoom() {
-	while (playfield.size() < 4) {
+	int size = 4;
+	int randomSize = roll1D6();
+	if (randomSize == 1) {
+		System.out.println("The next room feels different than the others");
+		size = roll1D6() + 1;
+	}
+	int size2 = roll1D6();
+	if (size2 == 1) {
+		size2 += 1;
+	}
+	while (playfield.size() < size) {
 		if (deck.isEmpty()) {
 			handleFinalRoom();
 			break;
 		}
 		playfield.add(deck.dealCard());
+
 	}
+	if (roll1D6() == 1) {
+			while (playfield2.size() < size2) {
+			if (deck.isEmpty()) {
+				handleFinalRoom();
+				break;
+			}
+			playfield2.add(deck.dealCard());
+
+		}
+		System.out.println("A branching path is before you.");
+		roomChoice();
+	}
+	size = 4;
+}
+
+public void holdItem(int index) {
+	if (held.size() > 1) {
+		System.out.println("You can only hold one item at a time.");
+	} else {
+		System.out.println("You have chosen to hold " + playfield.get(index -1));
+		held.add(playfield.get(index -1 ));
+		playfield.remove(index -1);
+	}
+}
+
+public void roomChoice() {
+	System.out.println("One is filled with " + playfield.size() + " cards, the other with " + playfield2.size() + " cards.");
+	displayPlayfield();
+	System.out.println("Which room would you like to enter? (1) or (2) > ");
+	int choice = -1;
+	while (choice != 1 && choice != 2) {
+		try {
+			choice = scanner.nextInt();
+			scanner.nextLine();
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input. Please enter a number (1 or 2).");
+			scanner.nextLine();
+			continue;
+		}
+		if (choice == 1) {
+			gameLogic.discard(playfield2);
+			break;
+		} else if (choice == 2) {
+			gameLogic.discard(playfield);
+			playfield.addAll(playfield2);
+			playfield2.clear();
+			break;
+		} else {
+			System.out.println("Invalid choice. Please try again.");
+		}
+	}
+}
+
+private int roll1D6() {
+	Random random = new Random();
+	return random.nextInt(1, 7);
 }
 
 private void handleFinalRoom() {
@@ -77,6 +148,8 @@ public void nextRoom() {
 				enter();
 			}
 			gameLogic.flee();
+		//} else if (choice == 3){
+		//	deck.getDiscards();
 		} else {
 			System.out.println("Invalid choice. Please try again.");
 			displayPlayfield();

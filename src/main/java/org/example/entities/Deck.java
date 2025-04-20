@@ -48,15 +48,15 @@ public void displayDeck() {
 }
 
 public void redFaceRemover() {
-	cards.removeIf(card -> (card.getSuit().equals(Suit.HEARTS) || card.getSuit().equals(Suit.DIAMONDS)) &&
-			(card.getRank().equals(Rank.ACE) || card.getRank().equals(Rank.KING) ||
-					card.getRank().equals(Rank.QUEEN) || card.getRank().equals(Rank.JACK)));
+	cards.removeIf(card -> (card.getSuit().equals(Suit.CUPS) || card.getSuit().equals(Suit.SWORDS)) &&
+			(card.getRank().equals(Rank.PAGE) || card.getRank().equals(Rank.KING) ||
+					card.getRank().equals(Rank.QUEEN) || card.getRank().equals(Rank.KNIGHT)));
 }
 
 public int score() {
 	int score = 0;
 	for (Card card : discards) {
-		if (card.getSuit().equals(Suit.CLUBS) || card.getSuit().equals(Suit.SPADES)) {
+		if (card.getSuit().equals(Suit.PENTACLES) || card.getSuit().equals(Suit.WANDS)) {
 			score += card.getValue();
 		}
 
@@ -77,8 +77,15 @@ public boolean isEmpty() {
 	return cards.isEmpty();
 
 }
+
 public void addToFront(Card card) {
 	cards.add(0, card);
 	discards.remove(card);
+}
+
+public void getDiscards() {
+	for (Card card : discards) {
+		System.out.println(card);
+	}
 }
 }
