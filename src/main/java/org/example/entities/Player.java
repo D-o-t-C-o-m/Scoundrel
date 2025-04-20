@@ -5,14 +5,14 @@ public class Player {
 public boolean hasFled;
 private int maxHealth;
 private int currentHealth;
-private int attackPower;
+private boolean attackPower;
 private int weaponPower;
 private boolean hasHealed;
 
 public Player(int maxHealth, int attackPower) {
 	this.maxHealth = 20;
 	this.currentHealth = maxHealth;
-	this.attackPower = attackPower;
+	this.attackPower = false;
 	this.hasFled = false;
 	this.hasHealed = false;
 }
@@ -33,13 +33,6 @@ public void setCurrentHealth(int currentHealth) {
 	this.currentHealth = currentHealth;
 }
 
-public int getAttackPower() {
-	return attackPower;
-}
-
-public void setAttackPower(int attackPower) {
-	this.attackPower = attackPower;
-}
 
 public int getWeaponPower() {
 	return weaponPower;
@@ -59,5 +52,12 @@ public boolean hasHealed() {
 
 public void setHasHealed(boolean hasHealed) {
 	this.hasHealed = hasHealed;
+}
+
+public boolean getAttackPower(){
+	return attackPower;
+}
+public void setAttackPower(boolean attackPower) {
+	this.attackPower = attackPower;
 }
 }

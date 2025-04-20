@@ -62,9 +62,12 @@ private void handleMonsterCard(Card card) {
 
 private void attackBareHanded(Card card) {
 	System.out.println("You attack the enemy with your bare hands.");
-	player.setAttackPower(EnemyHealth);
+
 	int damage = player.getCurrentHealth() - card.getValue();
 	player.setCurrentHealth(damage);
+	if (player.getAttackPower()){
+		player.setCurrentHealth(player.getCurrentHealth() + 2);
+	}
 	if (player.getCurrentHealth() <= 0) {
 		System.out.println("You have been defeated.");
 		System.out.println("Your final score is: " + getScore());

@@ -77,7 +77,6 @@ public void holdItem(int index) {
 
 public void roomChoice() {
 	System.out.println("One is filled with " + playfield.size() + " cards, the other with " + playfield2.size() + " cards.");
-	displayPlayfield();
 	System.out.println("Which room would you like to enter? (1) or (2) > ");
 	int choice = -1;
 	while (choice != 1 && choice != 2) {

@@ -20,6 +20,7 @@ public Deck() {
 		}
 	}
 	redFaceRemover();
+	eventCardRemover();
 }
 
 public void shuffle() {
@@ -51,6 +52,10 @@ public void redFaceRemover() {
 	cards.removeIf(card -> (card.getSuit().equals(Suit.CUPS) || card.getSuit().equals(Suit.SWORDS)) &&
 			(card.getRank().equals(Rank.PAGE) || card.getRank().equals(Rank.KING) ||
 					card.getRank().equals(Rank.QUEEN) || card.getRank().equals(Rank.KNIGHT)));
+}
+
+public void eventCardRemover() {
+	cards.removeIf(card -> card.getSuit().equals(Suit.EVENT));
 }
 
 public int score() {
