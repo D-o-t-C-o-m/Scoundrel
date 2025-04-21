@@ -16,7 +16,7 @@ public class RoomManager {
     private boolean goodStart = false;
     private boolean winState = false;
     private int roomCount = 0;
-private Card lastRoomCard = null;
+    private Card lastRoomCard = null;
 
 
 public RoomManager(Deck deck) {
@@ -106,7 +106,7 @@ public void resolveRoomChoice(int choice) {
         playfield2.clear();
 
 
-        List<Card> cardsToKeep = new ArrayList<>(playfield);
+        //List<Card> cardsToKeep = new ArrayList<>(playfield);
         playfield.clear();
 
         fillPlayfield(playfield, Constants.DEFAULT_ROOM_SIZE - (lastRoomCard != null ? 1 : 0));
@@ -178,9 +178,6 @@ public int getRoomCount() {
     return roomCount;
 }
 
-public boolean isWinState() {
-    return winState;
-}
 public void saveLastCard() {
     if (playfield.size() == 1) {
         lastRoomCard = playfield.getFirst();

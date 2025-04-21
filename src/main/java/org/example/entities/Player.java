@@ -2,6 +2,9 @@ package org.example.entities;
 
 import org.example.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 private boolean hasFled;
 private int maxHealth;
@@ -9,6 +12,7 @@ private int currentHealth;
 private boolean attackPower;
 private int weaponPower;
 private boolean hasHealed;
+private List<String> inventory;
 
 
 public Player(int maxHealth, int weaponPower) {
@@ -18,6 +22,7 @@ public Player(int maxHealth, int weaponPower) {
 	this.attackPower = false;
 	this.hasFled = false;
 	this.hasHealed = false;
+	this.inventory = new ArrayList<>();
 }
 
 
@@ -54,6 +59,10 @@ public void setWeaponPower(int weaponPower) {
 	this.weaponPower = Math.max(0, weaponPower);
 }
 
+public List<String> getInventory() {
+	return inventory;
+}
+
 public boolean hasFled() {
 	return hasFled;
 }
@@ -73,5 +82,21 @@ public void setHasHealed(boolean hasHealed) {
 public boolean hasAttackPower() {
 	return attackPower;
 }
+
+public void addItemToInventory(String item) {
+	if (inventory.isEmpty()) {
+		inventory.add(item);
+	} else {
+		System.out.println("You can only hold one item.");
+	}
+}
+public void removeItemFromInventory() {
+	if (!inventory.isEmpty()) {
+		inventory.remove(0);
+	} else {
+		System.out.println("Your inventory is empty.");
+	}
+}
+
 
 }

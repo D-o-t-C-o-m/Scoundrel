@@ -46,9 +46,15 @@ private void gameLoop() {
 }
 
 private void displayGameState() {
-	System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() +
-			" | Attack Power: " + player.getWeaponPower() + " | " +
-			"Remaining Obstacles: " + deck.cardsLeft());
+	if (player.getInventory().isEmpty()) {
+		System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() +
+				" | Attack Power: " + player.getWeaponPower() + " | " +
+				"Remaining Obstacles: " + deck.cardsLeft());
+} else {
+		System.out.println("\nHealth Points: " + player.getCurrentHealth() + "/ " + player.getMaxHealth() +
+				" | Attack Power: " + player.getWeaponPower() + " | " +
+				"Remaining Obstacles: " + deck.cardsLeft() + " | Inventory: " +player.getInventory());
+	}
 	System.out.println("------------------------------------------------------------------");
 	System.out.println(" " + roomManager.getPlayfield() + "\n");
 }

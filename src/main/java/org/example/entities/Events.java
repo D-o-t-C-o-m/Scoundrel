@@ -1,9 +1,23 @@
 package org.example.entities;
 
+import org.example.InputHandler;
+
+import java.util.Random;
+
+
 public class Events {
+private Player player;
+private InputHandler inputHandler;
 
-public void getEvent(int event) {
 
+public Events(InputHandler inputHandler, Player player) {
+	this.inputHandler = inputHandler;
+	this.player = player;
+}
+
+public void getEvent() {
+	Random random = new Random();
+	int event = random.nextInt(22) + 1;
 	switch (event) {
 		case 1 -> theFool();
 		case 2 -> theMagician();
@@ -29,21 +43,33 @@ public void getEvent(int event) {
 		case 22 -> theSun();
 	}
 }
-	/**
-	 * Gives you a healing item slot, but if you overheal you Overdose and lose max HP equal to the over heal.
-	 * IE 12 + 10 = 22, 22 - 2 = 20, - 2 Max HP is now 18
-	 */
-	private void theFool () {
-		// Implementation pending
-	}
 
-	/**
-	 * Can be used as a one time use scroll to Fireball an enemy for X Damage
-	 * Consumable
-	 */
-	private void theMagician () {
-		// Implementation pending
+/**
+ * Gives you a healing item slot, but if you overheal you Overdose and lose max HP equal to the over heal.
+ * IE 12 + 10 = 22, 22 - 2 = 20, - 2 Max HP is now 18
+ */
+private void theFool() {
+	// Implementation pending
+}
+
+/**
+ * Can be used as a one time use scroll to Fireball an enemy for X Damage
+ * Consumable
+ */
+private void theMagician() {
+	if (this.player.getInventory().isEmpty()) {
+		System.out.println("A dusty scroll lays forgotten on a table, you have found a fireball scroll");
+		this.player.addItemToInventory("Scroll");
+	} else {
+		boolean choice = inputHandler.getYesNoChoice("A scroll of fireball lays on the table, but you don't have anywhere to put it. do you want to take it and discard your current inventory?");
+		if (choice) {
+			this.player.removeItemFromInventory();
+			this.player.addItemToInventory("Scroll");
+		} else {
+			System.out.println("You leave the scroll behind.");
+		}
 	}
+}
 
 	/**
 	 * Can sell weapons for their Power as HP (IE A 5 of Swords can buy a 5 heal)
@@ -73,11 +99,19 @@ public void getEvent(int event) {
 		// Implementation pending
 	}
 
-	/**
-	 * Hold one healing item
-	 */
 	private void theLovers () {
-		// Implementation pending
+		if (this.player.getInventory().isEmpty()) {
+			System.out.println("A corked health potion sits on a shelf");
+			this.player.addItemToInventory("Potion");
+		} else {
+			boolean choice = inputHandler.getYesNoChoice("A corked health potion sits on a shelf, but you don't have anywhere to put it. do you want to take it and discard your current inventory?");
+			if (choice) {
+				this.player.removeItemFromInventory();
+				this.player.addItemToInventory("Potion");
+			} else {
+				System.out.println("You leave the scroll behind.");
+			}
+		}
 	}
 
 	/**
@@ -125,7 +159,7 @@ public void getEvent(int event) {
 	/**
 	 * An Ace with 1d6 additional Damage
 	 */
-   //Death: shuffle selected card and replace it with the strongest enemy left in the deck (usually ace).Useful to making the most of a fresh sword
+	//Death: shuffle selected card and replace it with the strongest enemy left in the deck (usually ace).Useful to making the most of a fresh sword
 	private void Death () {
 		// Implementation pending
 	}
@@ -187,5 +221,6 @@ public void getEvent(int event) {
 	}
 
 }
+
 
 

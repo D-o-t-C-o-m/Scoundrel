@@ -5,7 +5,6 @@ import org.example.enums.EventRank;
 import org.example.enums.Rank;
 import org.example.enums.Suit;
 
-
 public class Card {
 private final Suit suit;
 private final Rank rank;
@@ -119,21 +118,15 @@ private String getFaceString() {
 
 private String getSuitSymbol() {
 	return switch (suit) {
-		case CUPS -> "\uD800\uDCEF"; // Cup
-		case SWORDS -> "⚸";
-		case PENTACLES -> "⛧";
-		case WANDS -> "⸝*";
-		case EVENT -> "\uD83D\uDD2E"; // Crystal Ball
+		case CUPS -> "C";//"\uD800\uDCEF"; // Cup
+		case SWORDS -> "S";//"⚸";
+		case PENTACLES -> "P"; //"⛧";
+		case WANDS -> "W";//"⸝*";
+		case EVENT -> "E";//"\uD83D\uDD2E"; // Crystal Ball
 	};
 }
 public CardColor getColor() {
 	return suit.getColor();
-}
-public boolean isRed() {
-	return getColor() == CardColor.RED;
-}
-public boolean isBlack() {
-	return getColor() == CardColor.BLACK;
 }
 
 public boolean isMonster() {
