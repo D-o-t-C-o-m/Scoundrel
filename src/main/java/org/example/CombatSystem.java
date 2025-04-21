@@ -24,33 +24,40 @@ public boolean handleCombat(Card enemyCard) {
     System.out.println("You approach " + enemyName + ".");
 
     while (enemyHealth > 0) {
-    int attackChoice = inputHandler.getCombatChoice();
-    if (attackChoice == 1) {
-        return performBareHandedAttack(enemyHealth);
-    } else if (attackChoice == 2) {
-        return performWeaponAttack(enemyHealth);
-    } else if (attackChoice == 3) {
-        System.out.println("You pull an item out of your pack");
-        String item = player.getInventory().get(0);
-        if (item.equals("Scroll")) {
-            enemyHealth = handleSpellDamage(enemyCard, 10);
-            if (enemyHealth <= 0) {
-                System.out.println("The enemy has been defeated.");
-                return true;
+        int attackChoice = inputHandler.getCombatChoice();
+        if (attackChoice == 1) {
+            return performBareHandedAttack(enemyHealth);
+        } else if (attackChoice == 2) {
+            return performWeaponAttack(enemyHealth);
+        } else if (attackChoice == 3) {
+            if (player.getInventory().isEmpty()) {
+                System.out.println("You have no items in your pack.");
+                continue;
+            }
+                System.out.println("You pull the " + player.getInventory().toString() + " out of your pack");
+                String item = player.getInventory().get(0);
+                if (item.equals("Scroll")) {
+                    enemyHealth = handleSpellDamage(enemyCard, 10);
+                    if (enemyHealth <= 0) {
+                        return true;
+                    } else {
+                        System.out.println("The enemy is still alive with " + enemyHealth + " health left.");
+                    }
+                } else {
+                    System.out.println("You cannot use this item.");
+                    continue;
+                }
             } else {
-                System.out.println("The enemy is still alive with " + enemyHealth + " health left.");
-                return false;
+        System.out.println("Invalid choice. Please try again.");
             }
         }
-        }
-    }
-    System.out.println("Invalid choice. Please try again.");
-    return false;
+return false;
+
 }
 
 private boolean performBareHandedAttack(int enemyHealth) {
     System.out.println("You attack the enemy with your bare hands.");
-
+    player.addItemToInventory("Scroll");
     int damage = enemyHealth;
     if (player.hasAttackPower()) {
         damage -= Constants.BARE_HANDED_BONUS;
@@ -72,7 +79,6 @@ private boolean performWeaponAttack(int enemyHealth) {
         System.out.println("Your weapon is already bound to slay weaker foes. You must fight barehanded.");
         return performBareHandedAttack(enemyHealth);
     }
-
     System.out.println("You attack the enemy with a weapon.");
     WeaponSystem.CombatResult result = weaponSystem.useWeaponAgainst(enemyHealth);
     if (result.playerDamage() > 0) {
@@ -92,7 +98,6 @@ private boolean performWeaponAttack(int enemyHealth) {
             System.out.println("You have defeated the enemy.");
         }
     }
-
     player.setWeaponPower(result.newWeaponPower());
     return true;
 }
@@ -106,14 +111,14 @@ private void handlePlayerDefeat() {
 private int handleSpellDamage(Card enemy, int damage) {
     if (enemy.isMonster()) {
         player.removeItemFromInventory();
-        int enemyHealth = enemy.getValue();
-        System.out.println("Fire explodes from your fingertips as you read the scroll, blasting the target for " + damage + "damage");
+        this.enemyHealth = enemy.getValue();
+        System.out.println("Fire explodes from your fingertips as you read the scroll, blasting the target for " + damage + " damage");
         if (enemyHealth > damage) {
             System.out.println("The enemy is weakened and badly burned");
             return enemyHealth - damage;
         } else {
             System.out.println("The enemy has been burnt to ash");
-            return enemy.getValue();
+            return 0;
         }
     }
         System.out.println("You cannot use a scroll on this target");

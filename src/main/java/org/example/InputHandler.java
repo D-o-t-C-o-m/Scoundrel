@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class InputHandler {
 private final Scanner scanner;
-private Player player;
 
 public InputHandler() {
     this.scanner = new Scanner(System.in);
@@ -67,13 +66,9 @@ public int getRoomEntryChoice() {
 }
 
 public int getCombatChoice() {
-    if (player.getInventory().isEmpty()) {
-        String prompt = "How will you attack? (1) Bare-Handed or (2) With a Weapon? > ";
-        return getNumericChoice(prompt, 1, 2);
-    } else {
         String prompt = "How will you attack? (1) Bare-Handed, (2) With a Weapon, or (3) Use Item > ";
         return getNumericChoice(prompt, 1, 3);
-    }
+
 }
 
 public int getRulesChoice() {

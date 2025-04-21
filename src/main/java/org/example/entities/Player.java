@@ -63,6 +63,7 @@ public List<String> getInventory() {
 	return inventory;
 }
 
+
 public boolean hasFled() {
 	return hasFled;
 }
