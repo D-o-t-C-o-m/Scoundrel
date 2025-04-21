@@ -1,22 +1,25 @@
 package org.example.entities;
 
+import org.example.enums.CardColor;
 import org.example.enums.EventRank;
-import org.example.enums.Suit;
 import org.example.enums.Rank;
+import org.example.enums.Suit;
+
 
 public class Card {
 private final Suit suit;
-private Rank rank;
-private EventRank eventRank;
+private final Rank rank;
+private final EventRank eventRank;
 
 public Card(Suit suit, Rank rank) {
 	this.suit = suit;
 	this.rank = rank;
-
+	this.eventRank = null;
 }
 
 public Card(Suit suit, EventRank eventRank) {
 	this.suit = suit;
+	this.rank = null;
 	this.eventRank = eventRank;
 }
 
@@ -28,223 +31,120 @@ public Rank getRank() {
 	return rank;
 }
 
-//
-@Override
-public String toString() {
-	String face = "";
-	String icon = "";
-	if (rank == org.example.enums.Rank.ACE) {
-		face = "A";
-	}
-	if (rank == Rank.TWO) {
-		face = "2";
-	}
-	if (rank == Rank.THREE) {
-		face = "3";
-	}
-	if (rank == Rank.FOUR) {
-		face = "4";
-	}
-	if (rank == Rank.FIVE) {
-		face = "5";
-	}
-	if (rank == Rank.SIX) {
-		face = "6";
-	}
-	if (rank == Rank.SEVEN) {
-		face = "7";
-	}
-	if (rank == Rank.EIGHT) {
-		face = "8";
-	}
-	if (rank == Rank.NINE) {
-		face = "9";
-	}
-	if (rank == Rank.TEN) {
-		face = "10";
-	}
-	if (rank == Rank.PAGE) {
-		face = "P";
-	}
-	if (rank == Rank.KNIGHT) {
-		face = "Kn";
-	}
-	if (rank == Rank.QUEEN) {
-		face = "Q";
-	}
-	if (rank == Rank.KING) {
-		face = "K";
-	}
-	if (eventRank == EventRank.ONE) {
-		face = "Fl";
-	}
-	if (eventRank == EventRank.TWO) {
-		face = "Mgn";
-	}
-	if (eventRank == EventRank.THREE) {
-		face = "HP";
-	}
-	if (eventRank == EventRank.FOUR) {
-		face = "Ems";
-	}
-	if (eventRank == EventRank.FIVE) {
-		face = "Emr";
-	}
-	if (eventRank == EventRank.SIX) {
-		face = "Hpt";
-	}
-	if (eventRank == EventRank.SEVEN) {
-		face = "L";
-	}
-	if (eventRank == EventRank.EIGHT) {
-		face = "Ch";
-	}
-	if (eventRank == EventRank.NINE) {
-		face = "Str";
-	}
-	if (eventRank == EventRank.TEN) {
-		face = "Hrt";
-	}
-	if (eventRank == EventRank.ELEVEN) {
-		face = "WoF";
-	}
-	if (eventRank == EventRank.TWELVE) {
-		face = "Jst";
-	}
-	if (eventRank == EventRank.THIRTEEN) {
-		face = "HM";
-	}
-	if (eventRank == EventRank.FOURTEEN) {
-		face = "Dth";
-	}
-	if (eventRank == EventRank.FIFTEEN) {
-		face = "Te";
-	}
-	if (eventRank == EventRank.SIXTEEN) {
-		face = "Dvl";
-	}
-	if (eventRank == EventRank.SEVENTEEN) {
-		face = "Twr";
-	}
-	if (eventRank == EventRank.EIGHTEEN) {
-		face = "Sr";
-	}
-	if (eventRank == EventRank.NINETEEN) {
-		face = "Mn";
-	}
-	if (eventRank == EventRank.TWENTY) {
-		face = "Sun";
-	}
-	if (eventRank == EventRank.TwentyOne) {
-		face = "Jmt";
-	}
-	if (eventRank == EventRank.TwentyTwo) {
-		face = "Wld";
-	}
-	if (suit == Suit.CUPS) {
-		icon += "\uD800\uDCEF"; //Cup
-		//icon += "❤️"; //Heart
-		//icon += "HEART"; // Placeholder for Heart icon
-	}
-	if (suit == Suit.SWORDS) {
-		//icon += "⚔️"; //Sword
-		icon += "⚸";
-		//icon += "DIAMOND"; // Placeholder for Diamond icon
-	}
-	if (suit == Suit.PENTACLES) {
-		//icon += "\uD83D\uDC80"; //Skull
-		icon += "⛧";
-		//icon += "CLUB"; // Placeholder for Club icon
-	}
-	if (suit == Suit.WANDS) {
-		//	icon += "\uD83E\uDDDF"; // Zombie
-		icon += "⸝*";
-		//icon += "SPADE"; // Placeholder for Spade icon
-	}
-	if (suit == Suit.EVENT) {
-		icon += "\uD83D\uDD2E"; // Crystal Ball
-		//icon += "⚪"; // Placeholder for Event icon
-	}
-	return face + " " + icon;
+public EventRank getEventRank() {
+	return eventRank;
+}
+
+public boolean isEventCard() {
+	return eventRank != null;
 }
 
 public int getValue() {
-	if (rank == Rank.ACE) {
-		return 14;
-	} else if (rank == Rank.TWO) {
-		return 2;
-	} else if (rank == Rank.THREE) {
-		return 3;
-	} else if (rank == Rank.FOUR) {
-		return 4;
-	} else if (rank == Rank.FIVE) {
-		return 5;
-	} else if (rank == Rank.SIX) {
-		return 6;
-	} else if (rank == Rank.SEVEN) {
-		return 7;
-	} else if (rank == Rank.EIGHT) {
-		return 8;
-	} else if (rank == Rank.NINE) {
-		return 9;
-	} else if (rank == Rank.TEN) {
-		return 10;
-	} else if (rank == Rank.PAGE) {
-		return 11;
-	} else if (rank == Rank.KNIGHT) {
-		return 12;
-	} else if (rank == Rank.QUEEN) {
-		return 13;
-	} else if (rank == Rank.KING) {
-		return 14;
-		//For Event cards
-	} else if (eventRank == EventRank.ONE) {
-		return 1;
-	} else if (eventRank == EventRank.TWO) {
-		return 2;
-	} else if (eventRank == EventRank.THREE) {
-		return 3;
-	} else if (eventRank == EventRank.FOUR) {
-		return 4;
-	} else if (eventRank == EventRank.FIVE) {
-		return 5;
-	} else if (eventRank == EventRank.SIX) {
-		return 6;
-	} else if (eventRank == EventRank.SEVEN) {
-		return 7;
-	} else if (eventRank == EventRank.EIGHT) {
-		return 8;
-	} else if (eventRank == EventRank.NINE) {
-		return 9;
-	} else if (eventRank == EventRank.TEN) {
-		return 10;
-	} else if (eventRank == EventRank.ELEVEN) {
-		return 11;
-	} else if (eventRank == EventRank.TWELVE) {
-		return 12;
-	} else if (eventRank == EventRank.THIRTEEN) {
-		return 13;
-	} else if (eventRank == EventRank.FOURTEEN) {
-		return 14;
-	} else if (eventRank == EventRank.FIFTEEN) {
-		return 15;
-	} else if (eventRank == EventRank.SIXTEEN) {
-		return 16;
-	} else if (eventRank == EventRank.SEVENTEEN) {
-		return 17;
-	} else if (eventRank == EventRank.EIGHTEEN) {
-		return 18;
-	} else if (eventRank == EventRank.NINETEEN) {
-		return 19;
-	} else if (eventRank == EventRank.TWENTY) {
-		return 20;
-	} else if (eventRank == EventRank.TwentyOne) {
-		return 21;
-	} else if (eventRank == EventRank.TwentyTwo) {
-		return 22;
-	} else {
-		return -1; // Invalid rank
+	if (rank != null) {
+		return switch (rank) {
+			case ACE -> 15;
+			case TWO -> 2;
+			case THREE -> 3;
+			case FOUR -> 4;
+			case FIVE -> 5;
+			case SIX -> 6;
+			case SEVEN -> 7;
+			case EIGHT -> 8;
+			case NINE -> 9;
+			case TEN -> 10;
+			case PAGE -> 11;
+			case KNIGHT -> 12;
+			case QUEEN -> 13;
+			case KING -> 14;
+		};
+	} else if (eventRank != null) {
+		// Event cards have value equal to their ordinal + 1
+		return eventRank.ordinal() + 1;
 	}
+	return -1;
+}
 
+
+@Override
+public String toString() {
+	return getFaceString() + " " + getSuitSymbol();
+}
+
+private String getFaceString() {
+	if (rank != null) {
+		return switch (rank) {
+			case ACE -> "A";
+			case TWO -> "2";
+			case THREE -> "3";
+			case FOUR -> "4";
+			case FIVE -> "5";
+			case SIX -> "6";
+			case SEVEN -> "7";
+			case EIGHT -> "8";
+			case NINE -> "9";
+			case TEN -> "10";
+			case PAGE -> "P";
+			case KNIGHT -> "Kn";
+			case QUEEN -> "Q";
+			case KING -> "K";
+		};
+	} else if (eventRank != null) {
+		return switch (eventRank) {
+			case ONE -> "Fl";
+			case TWO -> "Mgn";
+			case THREE -> "HP";
+			case FOUR -> "Ems";
+			case FIVE -> "Emr";
+			case SIX -> "Hpt";
+			case SEVEN -> "L";
+			case EIGHT -> "Ch";
+			case NINE -> "Str";
+			case TEN -> "Hrt";
+			case ELEVEN -> "WoF";
+			case TWELVE -> "Jst";
+			case THIRTEEN -> "HM";
+			case FOURTEEN -> "Dth";
+			case FIFTEEN -> "Te";
+			case SIXTEEN -> "Dvl";
+			case SEVENTEEN -> "Twr";
+			case EIGHTEEN -> "Sr";
+			case NINETEEN -> "Mn";
+			case TWENTY -> "Sun";
+			case TWENTY_ONE -> "Jmt";
+			case TWENTY_TWO -> "Wld";
+		};
+	}
+	return "";
+}
+
+private String getSuitSymbol() {
+	return switch (suit) {
+		case CUPS -> "\uD800\uDCEF"; // Cup
+		case SWORDS -> "⚸";
+		case PENTACLES -> "⛧";
+		case WANDS -> "⸝*";
+		case EVENT -> "\uD83D\uDD2E"; // Crystal Ball
+	};
+}
+public CardColor getColor() {
+	return suit.getColor();
+}
+public boolean isRed() {
+	return getColor() == CardColor.RED;
+}
+public boolean isBlack() {
+	return getColor() == CardColor.BLACK;
+}
+
+public boolean isMonster() {
+	return suit == Suit.WANDS || suit == Suit.PENTACLES;
+}
+
+public boolean isHealing() {
+	return suit == Suit.CUPS;
+}
+
+public boolean isWeapon() {
+	return suit == Suit.SWORDS;
 }
 }
