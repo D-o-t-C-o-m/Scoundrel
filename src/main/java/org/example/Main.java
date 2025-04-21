@@ -12,10 +12,11 @@ public static void main(String[] args) {
 	startGame(inputHandler);
 }
 
-
 private static void displayRules() {
 	System.out.println();
-	System.out.println("Welcome to Hea\uD801\uDD63hen, a card game where are trying to escape a dungeon...");
+	System.out.println("Welcome to Hea\uD801\uDD63hen, a card game where are trying to escape a dungeon.");
+	System.out.println("The game follows in the footsteps of Scoundrel");
+	System.out.println("I'll put the rest of this in later");
 }
 
 private static void startGame(InputHandler inputHandler) {

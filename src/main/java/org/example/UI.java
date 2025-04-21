@@ -97,8 +97,6 @@ private void processRoom() {
 	}
 }
 
-
-
 private void processCardInteraction(Card card, int cardIndex) {
 	if (card.isHealing()) {
 		combatSystem.handleHealing(card.getValue());
@@ -113,7 +111,6 @@ private void processCardInteraction(Card card, int cardIndex) {
 		}
 	}
 }
-
 
 private void resetForNextRoom() {
 	player.setHasHealed(false);
@@ -130,7 +127,6 @@ private void resetForNextRoom() {
 	}
 
 }
-
 
 private void checkWin() {
 	System.out.println("You have cleared the final obstacle and escaped the dungeon!");

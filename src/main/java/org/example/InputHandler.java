@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.entities.Player;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -68,11 +66,10 @@ public int getRoomEntryChoice() {
 public int getCombatChoice() {
         String prompt = "How will you attack? (1) Bare-Handed, (2) With a Weapon, or (3) Use Item > ";
         return getNumericChoice(prompt, 1, 3);
-
 }
 
 public int getRulesChoice() {
-    String prompt = "Do you want to play with the (1) Original weapon rules or the (2) New rules?\n> ";
+    String prompt = "Do you want to play with the (1) Original weapon rules (Weapons bind on kill) or the (2) New rules?\n> ";
     return getNumericChoice(prompt, 1, 2);
 }
 

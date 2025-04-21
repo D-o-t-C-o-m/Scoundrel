@@ -52,10 +52,6 @@ private void theFool() {
 	// Implementation pending
 }
 
-/**
- * Can be used as a one time use scroll to Fireball an enemy for X Damage
- * Consumable
- */
 private void theMagician() {
 	if (this.player.getInventory().isEmpty()) {
 		System.out.println("A dusty scroll lays forgotten on a table, you have found a fireball scroll");

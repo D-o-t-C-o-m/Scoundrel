@@ -9,7 +9,6 @@ private final WeaponSystem weaponSystem;
 private final InputHandler inputHandler;
 private int enemyHealth;
 
-
 public CombatSystem(Player player, WeaponSystem weaponSystem, InputHandler inputHandler) {
     this.player = player;
     this.weaponSystem = weaponSystem;
@@ -52,12 +51,10 @@ public boolean handleCombat(Card enemyCard) {
             }
         }
 return false;
-
 }
 
 private boolean performBareHandedAttack(int enemyHealth) {
     System.out.println("You attack the enemy with your bare hands.");
-    player.addItemToInventory("Scroll");
     int damage = enemyHealth;
     if (player.hasAttackPower()) {
         damage -= Constants.BARE_HANDED_BONUS;

@@ -1,7 +1,6 @@
 package org.example.entities;
 
 import org.example.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ private boolean attackPower;
 private int weaponPower;
 private boolean hasHealed;
 private List<String> inventory;
-
 
 public Player(int maxHealth, int weaponPower) {
 	this.maxHealth = maxHealth;
@@ -62,7 +60,6 @@ public void setWeaponPower(int weaponPower) {
 public List<String> getInventory() {
 	return inventory;
 }
-
 
 public boolean hasFled() {
 	return hasFled;

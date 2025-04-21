@@ -63,7 +63,6 @@ public int getValue() {
 	return -1;
 }
 
-
 @Override
 public String toString() {
 	return getFaceString() + " " + getSuitSymbol();

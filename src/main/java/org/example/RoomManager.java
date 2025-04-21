@@ -97,15 +97,11 @@ public RoomManager(Deck deck) {
     }
 
 public void resolveRoomChoice(int choice) {
-    
     saveLastCard();
-    
-    if (choice == 1) {
 
+    if (choice == 1) {
         discardCards(playfield2);
         playfield2.clear();
-
-
         //List<Card> cardsToKeep = new ArrayList<>(playfield);
         playfield.clear();
 
@@ -130,8 +126,6 @@ public void resolveRoomChoice(int choice) {
             discardCards(temp);
         }
     }
-
-
 
 
     public void removeCardAtIndex(int index) {
@@ -183,7 +177,6 @@ public void saveLastCard() {
         lastRoomCard = playfield.getFirst();
     }
 }
-
 public void resetLastCard() {
     lastRoomCard = null;
 }
